@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item Calculator</title>
+</head>
+<body>
+<h1>Item Calculator</h1>
+
+<!-- Item Key -->
+<h2>Item Key</h2>
+<pre>
+Weapons:
+- The Fixer:1
+- Pepper Shaker:1
+- Flamer:1
+- Laser Pistol:1
+- Laser Rifle:1
+- Laser Gatling:1
+- Plasma Pistol:1
+- Plasma Rifle:1
+- Plasma Gatling:1
+
+Upgrades:
+- The Fixer:1
+- Pepper Shaker:1
+- Flamer:1
+- Laser Pistol:1
+- Laser Rifle:1
+- Laser Gatling:1
+- Plasma Pistol:1
+- Plasma Rifle:1
+- Plasma Gatling:1
+
+Armor:
+- T-60 Set of Armor:1
+- Jetpack:1
+- Armor Upgrades:1
+
+Consumables:
+- Food/Water/Med Rations Pack:1
+
+Miscellaneous:
+- Fusion Cores:1
+- Legendary Roll:1
+- Regular Repair:1
+- Double Durability Repair:1
+</pre>
+
+<!-- Define item prices -->
+<script>
+var weapon_prices = {
+    "The Fixer": 35,
+    "Pepper Shaker": 45,
+    "Flamer": 55,
+    "Laser Pistol": 5,
+    "Laser Rifle": 5,
+    "Laser Gatling": 30,
+    "Plasma Pistol": 5,
+    "Plasma Rifle": 5,
+    "Plasma Gatling": 30
+};
+
+var upgrade_prices = {
+    "The Fixer": 4,
+    "Pepper Shaker": 5,
+    "Flamer": 7,
+    "Laser Pistol": 2,
+    "Laser Rifle": 3,
+    "Laser Gatling": 5,
+    "Plasma Pistol": 2,
+    "Plasma Rifle": 3,
+    "Plasma Gatling": 5
+};
+
+var armor_prices = {
+    "T-60 Set of Armor": 300,
+    "Jetpack": 50,
+    "Armor Upgrades": 8
+};
+
+var consumable_prices = {
+    "Food/Water/Med Rations Pack": 40
+};
+
+var misc_prices = {
+    "Fusion Cores": 10,
+    "Legendary Roll": 200,
+    "Regular Repair": 2,
+    "Double Durability Repair": 4
+};
+
+// Define function to calculate total cost
+function calculate_total_cost() {
+    try {
+        var items_to_purchase = {};
+        var items = document.getElementById("items").value.split("\n");
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i].trim();
+            if (item) {
+                var parts = item.split(":");
+                var item_name = parts[0].trim();
+                var quantity = parseInt(parts[1].trim());
+                items_to_purchase[item_name] = quantity;
+            }
+        }
+        var total_cost = calculate_total_cost_from_items(items_to_purchase);
+        document.getElementById("result").innerText = "Total cost: " + total_cost + " caps";
+    } catch (e) {
+        document.getElementById("result").innerText = "Error: " + e;
+    }
+}
+
+function calculate_total_cost_from_items(items) {
+    var total_cost = 0;
+    for (var item in items) {
+        if (items.hasOwnProperty(item)) {
+            if (weapon_prices.hasOwnProperty(item)) {
+                total_cost += weapon_prices[item] * items[item];
+            } else if (upgrade_prices.hasOwnProperty(item)) {
+                total_cost += upgrade_prices[item] * items[item];
+            } else if (armor_prices.hasOwnProperty(item)) {
+                total_cost += armor_prices[item] * items[item];
+            } else if (consumable_prices.hasOwnProperty(item)) {
+                total_cost += consumable_prices[item] * items[item];
+            } else if (misc_prices.hasOwnProperty(item)) {
+                total_cost += misc_prices[item] * items[item];
+            } else {
+                throw "Item " + item + " not found in price list.";
+            }
+        }
+    }
+    return total_cost;
+}
+</script>
+
+<!-- Input form -->
+<p>Enter items and quantities (item:quantity):</p>
+<textarea id="items" rows="5" cols="50"></textarea><br>
+<button onclick="calculate_total_cost()">Calculate</button>
+
+<!-- Result -->
+<p id="result"></p>
+
+</body>
+</html>

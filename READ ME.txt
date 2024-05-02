@@ -1,0 +1,24 @@
+Item Calculator
+
+This repository hosts an HTML-based item calculator that allows users to calculate the total cost of purchasing various items. The calculator includes prices for weapons, upgrades, armor, consumables, and miscellaneous items.
+
+How to Use
+
+To use the item calculator, follow these steps:
+
+1. Open the hosted HTML file in your web browser.
+2. Enter the items you want to purchase along with their quantities in the specified format (item:quantity).
+3. Click the "Calculate" button to see the total cost.
+4. View the total cost displayed below the input field.
+
+Item Key
+
+Refer to the item key provided in the HTML file for a list of available items and their formats for entry.
+
+Hosting
+
+This HTML file is hosted using GitHub Pages. You can access the hosted calculator here: https://your-username.github.io/repository-name.
+
+License
+
+This project is licensed under the MIT License.
